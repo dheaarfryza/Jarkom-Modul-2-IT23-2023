@@ -51,10 +51,10 @@ zone "arjuna.it23.com" {
 ```
 
 Copy file db.local ke folder arjuna.it.23.com :
-```cp /etc/bind/db.local /etc/bind/arjuna.it23.com```
+```cp /etc/bind/db.local /etc/bind/it23/arjuna.it23.com```
 
 Buka file arjuna.it23.com :
-```nano /etc/bind/arjuna.it23.com```
+```nano /etc/bind/it23/arjuna.it23.com```
 
 Code :
 ```bash
@@ -116,20 +116,20 @@ Code :
 ```bash
 zone "arjuna.it23.com" {
 	type master;
-	file "/etc/bind/arjuna.it23.com";
+	file "/etc/bind/it23/arjuna.it23.com";
 };
 
 zone "abimanyu.it23.com" {
 	type master;
-	file "/etc/bind/jarkom/abimanyu.it23.com";
+	file "/etc/bind/jarkom/it23/abimanyu.it23.com";
 };
 ```
 
 Copy file db.local ke folder arjuna.it.23.com :
-```cp /etc/bind/db.local /etc/bind/abimanyu.it23.com```
+```cp /etc/bind/db.local /etc/bind/it23/abimanyu.it23.com```
 
 Buka file abimanyu.it23.com :
-```nano /etc/bind/abimanyu.it23.com```
+```nano /etc/bind/it23/abimanyu.it23.com```
 
 Code :
 ```bash
@@ -147,7 +147,7 @@ $TTL    604800
 @           IN      NS      abimanyu.it23.com.
 @           IN      A       10.75.2.4 ; IP Abimanyu
 www         IN      CNAME   abimanyu.it23.com.
-@           IN      AAAA    ::1' > /etc/bind/abimanyu.it23.com
+@           IN      AAAA    ::1' > /etc/bind/it23/abimanyu.it23.com
 
 
 ```
@@ -171,7 +171,7 @@ Buatlah subdomain parikesit.abimanyu.yyy.com yang diatur DNS-nya di Yudhistira d
 
 #### Pengerjaan :
 Buka file abimanyu.it23.com :
-```nano /etc/bind/abimanyu.it23.com```
+```nano /etc/bind/it23/abimanyu.it23.com```
 
 Code :
 ```bash
@@ -205,6 +205,50 @@ Di Sadewa Client :
 
 ### Soal 5
 #### Description :
-Buatlah website utama dengan akses ke arjuna.it23.com dengan alias www.arjuna.it23.com 
+Buatlah reverse domain untuk domain utama, yaitu Abimanyu
 
 #### Pengerjaan :
+Membuka file di named.conf.local :
+```nano /etc/bind/named.conf.local```
+
+Code :
+```bash
+zone "arjuna.it23.com" {
+	type master;
+	file "/etc/bind/it23/arjuna.it23.com";
+};
+
+zone "abimanyu.it23.com" {
+	type master;
+	file "/etc/bind/it23/abimanyu.it23.com";
+};
+
+zone "2.75.10.in-addr.arpa" {
+    type master;
+    file "/etc/bind/it23/4.3.75.10.in-addr.arpa";
+};
+```
+
+Buka file abimanyu.it23.com :
+```nano /etc/bind/it23/abimanyu.it23.com```
+
+Code :
+```bash
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     abimanyu.it23.com. root.abimanyu.it23.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@           IN      NS      abimanyu.it23.com.
+@           IN      A       10.75.2.4 ; IP Abimanyu
+www         IN      CNAME   abimanyu.it23.com.
+parikesit   IN      A       10.75.2.4 ; IP
+@           IN      AAAA    ::1
+```
+
