@@ -684,7 +684,11 @@ service nginx restart
 Di Nakula Client
 Akses ke :
 ``` lynx http://www.arjuna.it23.com ```
+Run lynx yang sama 3 kali :
 ![hi prabukusuma](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/9d9909f4-cf96-4e68-960a-dbf5aea815d9)
+![hi Abimanyu](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/9db80917-864b-4e31-a083-b24764afe54a)
+![hi wisanggeni](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/d035dac7-9f6f-4ad2-8a28-881779bb9918)
+
 
 
 ### Soal 11
