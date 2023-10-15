@@ -681,8 +681,10 @@ ln -s /etc/nginx/sites-available/load-balancer /etc/nginx/sites-enabled/load-bal
 service nginx restart
 ```
 
+Di Nakula Client
 Akses ke :
 ``` lynx http://www.arjuna.it23.com ```
+![hi prabukusuma](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/9d9909f4-cf96-4e68-960a-dbf5aea815d9)
 
 
 ### Soal 11
