@@ -32,6 +32,7 @@ Dengan Yudhistira sebagai DNS Master nya dan Werkudara sebagai DNS Slave nya, se
 Buatlah website utama dengan akses ke arjuna.it23.com dengan alias www.arjuna.it23.com 
 
 #### Pengerjaan :
+Di Yudhistira DNS Master :
 Install :
 ```
 apt-get update
@@ -78,34 +79,69 @@ www         IN      CNAME   arjuna.it23.com.
 Restart bind :
 ```service bind9 restart```
 
+Di Sadewa Client :
 ping arjuna.it23.com dan www.arjuna.it23.com
 ```ping arjuna.it23.com```
-![ping arjuna it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/05933456-e943-48b9-aa8a-ca6722b39e49)
+![ping arjuna it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/eb3d2857-6d10-4629-b1ab-ee66fc881704)
 
 ```ping www.arjuna.it23.com```
-![ping www arjuna it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/27e092ba-a98f-4e78-b1e8-221c444e08c4)
+![ping www arjuna it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/41fdb8df-43b1-472f-ab12-f64a2308d5cb)
 
 
-### Soal 1
+### Soal 3
 #### Description :
-Membuat topologi berdasarkan pada folder drive yang diminta, yaitu topologi ke-2. Dengan Yudhistira sebagai DNS Master, Werkudara sebagai DNS Slave, Arjuna sebagai Load Balancer yang terdiri dari beberapa Web Server yaitu Prabakusuma, Abimanyu, dan Wisanggeni.
+Buatlah website utama dengan akses ke arjuna.it23.com dengan alias www.arjuna.it23.com 
 
-#### PoC :
+#### Pengerjaan :
+Membuka file di named.conf.local :
+```nano /etc/bind/named.conf.local```
 
-### Soal 1
+Code :
+```bash
+zone "arjuna.it23.com" {
+	type master;
+	file "/etc/bind/arjuna.it23.com";
+};
+```
+
+Copy file db.local ke folder arjuna.it.23.com :
+```cp /etc/bind/db.local /etc/bind/arjuna.it23.com```
+
+Buka file arjuna.it23.com :
+```nano /etc/bind/arjuna.it23.com```
+
+Code :
+```bash
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     arjuna.it23.com. root.arjuna.it23.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@           IN      NS      arjuna.it23.com.
+@           IN      A       10.75.2.3 ; IP Arjuna
+www         IN      CNAME   arjuna.it23.com.
+@           IN      AAAA    ::1
+
+```
+
+Restart bind :
+```service bind9 restart```
+
+### Soal 4
 #### Description :
-Membuat topologi berdasarkan pada folder drive yang diminta, yaitu topologi ke-2. Dengan Yudhistira sebagai DNS Master, Werkudara sebagai DNS Slave, Arjuna sebagai Load Balancer yang terdiri dari beberapa Web Server yaitu Prabakusuma, Abimanyu, dan Wisanggeni.
+Buatlah website utama dengan akses ke arjuna.it23.com dengan alias www.arjuna.it23.com 
 
-#### PoC :
+#### Pengerjaan :
 
-### Soal 1
+
+### Soal 5
 #### Description :
-Membuat topologi berdasarkan pada folder drive yang diminta, yaitu topologi ke-2. Dengan Yudhistira sebagai DNS Master, Werkudara sebagai DNS Slave, Arjuna sebagai Load Balancer yang terdiri dari beberapa Web Server yaitu Prabakusuma, Abimanyu, dan Wisanggeni.
+Buatlah website utama dengan akses ke arjuna.it23.com dengan alias www.arjuna.it23.com 
 
-#### PoC :
-
-### Soal 1
-#### Description :
-Membuat topologi berdasarkan pada folder drive yang diminta, yaitu topologi ke-2. Dengan Yudhistira sebagai DNS Master, Werkudara sebagai DNS Slave, Arjuna sebagai Load Balancer yang terdiri dari beberapa Web Server yaitu Prabakusuma, Abimanyu, dan Wisanggeni.
-
-#### PoC :
+#### Pengerjaan :
