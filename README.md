@@ -379,6 +379,18 @@ zone "2.75.10.in-addr.arpa" {
 Restart bind :
 ```service bind9 restart```
 
+Di Yudhistira
+```service bind9 stop ```
+
+Di Sadewa
+ping arjuna.it23.com dan abimanyu.it23.com
+
+```ping arjuna.it23.com -c 5```
+![ping www arjuna it23 com saat slave](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/29b16e58-82ee-4d1e-82db-a5369e9c099d)
+
+```ping abimanyu.it23.com -c 5```
+![ping www abimanyu it23 com saat slave](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/c6785edc-269b-454e-89c6-54907a817099)
+
 
 ### Soal 7
 #### Description :
@@ -454,6 +466,13 @@ zone "2.75.10.in-addr.arpa" {
 Restart bind :
 ```service bind9 restart```
 
+Di Sadewa Client :
+
+```ping baratayuda.abimanyu.it23.com -c 5```
+![ping baratayuda abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/f0646b3e-6c5c-4845-9a06-0a5d20a938d0)
+
+```ping www.baratayuda.abimanyu.it23.com -c 5```
+![ping www baratayuda abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/8c524eeb-0faf-416b-b335-d749be503b7d)
 
 
 ### Soal 8
