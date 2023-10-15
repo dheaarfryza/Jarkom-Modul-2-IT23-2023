@@ -25,6 +25,31 @@ Berikut adalah hasil dari Topologi yang sudah dibuat :
 ![topologi(1)](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/967003e3-d590-4188-bd21-0e3238a69c54)
 Dengan Yudhistira sebagai DNS Master nya dan Werkudara sebagai DNS Slave nya, serta Sadewa dan Nakula sebagai Client nya.
 
+Configure Pandudewanata :
+```bash
+# Static config for eth0
+auto eth0
+iface eth0 inet dhcp
+
+# Static config for eth1
+auto eth1
+iface eth1 inet static
+	address 10.75.1.1
+	netmask 255.255.255.0
+
+# Static config for eth2
+auto eth2
+iface eth2 inet static
+	address 10.75.2.1
+	netmask 255.255.255.0
+
+# Static config for eth3
+auto eth3
+iface eth3 inet static
+	address 10.75.3.1
+	netmask 255.255.255.0
+
+```
 
 ### Soal 2
 #### Description :
