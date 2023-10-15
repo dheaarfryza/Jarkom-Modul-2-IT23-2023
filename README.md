@@ -400,6 +400,14 @@ Buatlah subdomain melalui Werkudara dengan akses rjp.baratayuda.abimanyu.yyy.com
 
 #### Pengerjaan :
 
+Di Sadewa Client :
+
+```ping rjp.baratayuda.abimanyu.it23.com -c 5```
+![ping rjp baratayuda abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/b5183c51-9c13-47c0-bd5a-062c58dc7ace)
+
+```ping www.rjp.baratayuda.abimanyu.it23.com -c 5```
+![ping www rjp baratayuda abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/59fe1d23-cd65-4ade-a01c-995ddef6e107)
+
 
 ### Soal 9
 #### Description :
