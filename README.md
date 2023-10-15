@@ -189,7 +189,7 @@ $TTL    604800
 @           IN      NS      abimanyu.it23.com.
 @           IN      A       10.75.2.4 ; IP Abimanyu
 www         IN      CNAME   abimanyu.it23.com.
-parikesit   IN      A       10.75.2.4 ; IP
+parikesit   IN      A       10.75.2.4 ; IP Abimanyu
 @           IN      AAAA    ::1
 ```
 
@@ -316,3 +316,103 @@ zone "2.75.10.in-addr.arpa" {
 
 Restart bind :
 ```service bind9 restart```
+
+
+### Soal 7
+#### Description :
+Buatlah subdomain khusus untuk perang, yaitu baratayuda.abimanyu.it23.com dengan alias www.baratayuda.abimanyu.it23.com yang didelegasikan dari Yudhistira ke Werkudara dengan IP menuju ke Abimanyu dalam folder Baratayuda
+
+#### Pengerjaan :
+Buka file abimanyu.it23.com
+```nano /etc/bind/it23/abimanyu.it23.com```
+
+Code :
+```bash
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     abimanyu.it23.com. root.abimanyu.it23.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@           	IN      NS      abimanyu.it23.com.
+@           	IN      A       10.75.2.4 ; IP Abimanyu
+www         	IN      CNAME   abimanyu.it23.com.
+parikesit   	IN      A       10.75.2.4 ; IP Abimanyu
+ns1		IN	A	10.75.2.4 ; IP Werkudara
+baratayuda	IN 	NS	ns1
+@           	IN      AAAA    ::1
+```
+
+Buka file named.conf.options
+```nano /etc/bind/named.conf.options```
+
+Code :
+```bash
+options {
+directory \"var/cache/bind\";
+allow-query{any;};
+
+auth-nxdomain no;
+listen-on-v6 { any; };
+};
+```
+
+Buka file named.conf.local :
+```nano /etc/bind/named.conf.local```
+
+Code :
+```bash
+zone "arjuna.it23.com" {
+	type master;
+	notify yes;
+    	also-notify { 10.75.2.2; }; # IP Werkudara
+    	allow-transfer { 10.75.2.2; }; # IP Werkudara
+	file "/etc/bind/it23/arjuna.it23.com";
+};
+
+zone "abimanyu.it23.com" {
+	type master;
+	notify yes;
+    	also-notify { 10.75.2.2; }; # IP Werkudara
+    	allow-transfer { 10.75.2.2; }; # IP Werkudara
+	file "/etc/bind/jarkom/it23/abimanyu.it23.com";
+};
+
+zone "2.75.10.in-addr.arpa" {
+    type master;
+    file "/etc/bind/it23/4.3.75.10.in-addr.arpa";
+};
+```
+
+Restart bind :
+```service bind9 restart```
+
+
+
+### Soal 8
+#### Description :
+Buatlah subdomain melalui Werkudara dengan akses rjp.baratayuda.abimanyu.yyy.com dengan alias www.rjp.baratayuda.abimanyu.yyy.com yang mengarah ke Abimanyu.
+
+#### Pengerjaan :
+
+
+### Soal 9
+#### Description :
+Lakukan deployment pada masing-masing worker. Dengan Arjuna merupakan suatu Load Balancer Nginx dengan tiga worker yaitu Prabakusuma, Abimanyu, dan Wisanggeni.
+
+#### Pengerjaan :
+
+
+### Soal 10
+#### Description :
+Gunakan algoritma Round Robin untuk Load Balancer pada Arjuna. Gunakan server_name pada soal nomor 1. Untuk melakukan pengecekan akses alamat web tersebut kemudian pastikan worker yang digunakan untuk menangani permintaan akan berganti ganti secara acak. Untuk webserver di masing-masing worker wajib berjalan di port 8001-8003. Contoh
+    - Prabakusuma:8001
+    - Abimanyu:8002
+    - Wisanggeni:8003
+
+#### Pengerjaan :
