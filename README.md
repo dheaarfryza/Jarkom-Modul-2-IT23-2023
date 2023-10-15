@@ -657,3 +657,39 @@ Gunakan algoritma Round Robin untuk Load Balancer pada Arjuna. Gunakan server_na
     - Wisanggeni:8003
 
 #### Pengerjaan :
+Masukkan config ke Arjuna Load Balancer di /etc/nginx/sites-available/load-balancer
+```bash
+# Mengonfigurasi Nginx dengan load balancing (Round Robin)
+upstream webserver {
+    server 10.75.2.5:8001; # IP Prabukusuma
+    server 10.75.2.4:8002; # IP Abimanyu
+    server 10.75.2.6:8003; # IP Wisanggeni
+}
+server {
+    listen 80;
+    server_name arjuna.it23.com www.arjuna.it23.com;
+    location / {
+        proxy_pass http://webserver;
+    }
+}
+```
+
+Run command :
+```
+ln -s /etc/nginx/sites-available/load-balancer /etc/nginx/sites-enabled/load-balancer
+
+service nginx restart
+```
+
+Akses ke :
+``` lynx http://www.arjuna.it23.com ```
+
+
+### Soal 11
+#### Description :
+Lakukan konfigurasi Apache Web Server pada worker Abimanyu dengan web server www.abimanyu.yyy.com. Pertama dibutuhkan web server dengan DocumentRoot pada /var/www/abimanyu.yyy
+
+
+### Pengerjaan :
+![11Abimanyu](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/8fb2a4c6-73a1-4658-a600-1d617efaadf2)
+
