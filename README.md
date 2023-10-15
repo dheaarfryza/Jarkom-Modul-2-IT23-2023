@@ -51,6 +51,43 @@ iface eth3 inet static
 
 ```
 
+Yudhistira :
+```bash
+auto eth0
+iface eth0 inet static
+	address 10.75.3.2
+	netmask 255.255.255.0
+	gateway 10.75.3.1
+```
+
+Werkudara :
+```bash
+auto eth0
+iface eth0 inet static
+	address 10.75.2.2
+	netmask 255.255.255.0
+	gateway 10.75.2.1
+```
+
+Arjuna :
+```bash
+auto eth0
+iface eth0 inet static
+	address 10.75.2.3
+	netmask 255.255.255.0
+	gateway 10.75.2.1
+```
+
+Abimanyu :
+```bash
+auto eth0
+iface eth0 inet static
+	address 10.75.2.4
+	netmask 255.255.255.0
+	gateway 10.75.2.1
+```
+
+
 ### Soal 2
 #### Description :
 Buatlah website utama dengan akses ke arjuna.it23.com dengan alias www.arjuna.it23.com 
