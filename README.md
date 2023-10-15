@@ -699,3 +699,17 @@ Lakukan konfigurasi Apache Web Server pada worker Abimanyu dengan web server www
 ### Pengerjaan :
 ![11Abimanyu](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/8fb2a4c6-73a1-4658-a600-1d617efaadf2)
 
+
+### Soal 12
+#### Description :
+
+
+### Pengerjaan :
+![12Abimanyu](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/20417717-2c10-4786-a07b-3d6b0189cd69)
+
+
+### Soal 13
+#### Description :
+
+
+### Pengerjaan :
