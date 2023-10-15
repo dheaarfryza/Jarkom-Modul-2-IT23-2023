@@ -543,8 +543,8 @@ service php7.2-fpm status
 
 Akses ke :
 ```lynx 10.75.2.5:8001```
+![9Prabukusuma](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/f009e5c3-2410-457f-b2b2-cb0d76b8b41f)
 
-Dokum
 
 #### Wisanggeni
 Buka file /var/www/jarkom_it23/index.php
@@ -594,8 +594,8 @@ service php7.2-fpm status
 
 Akses ke :
 ```lynx 10.75.2.6:8002```
+![9Wisanggeni](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/18fd7d66-b731-4588-89b1-f1597b582d1f)
 
-Dokum :
 
 #### Abimanyu
 Buka file /var/www/jarkom_it23/index.php
@@ -645,8 +645,8 @@ service php7.2-fpm status
 
 Akses ke :
 ```lynx 10.75.2.4:8003```
+![9Abimanyu](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/33053b3d-e5c6-4679-ae5a-851167ea0f15)
 
-Dokum :
 
 
 ### Soal 10
