@@ -125,7 +125,7 @@ zone "abimanyu.it23.com" {
 };
 ```
 
-Copy file db.local ke folder arjuna.it.23.com :
+Copy file db.local ke folder arjuna.it23.com :
 ```cp /etc/bind/db.local /etc/bind/it23/abimanyu.it23.com```
 
 Buka file abimanyu.it23.com :
@@ -229,8 +229,11 @@ zone "2.75.10.in-addr.arpa" {
 };
 ```
 
-Buka file abimanyu.it23.com :
-```nano /etc/bind/it23/abimanyu.it23.com```
+Copy file db.local ke folder abimanyu.it23.com :
+```cp /etc/bind/db.local /etc/bind/jarkom/2.75.10.in-addr.arpa```
+
+Buka file 2.75.10.in-addr.arpa :
+```nano /etc/bind/it23/2.75.10.in-addr.arpa```
 
 Code :
 ```bash
@@ -244,11 +247,72 @@ $TTL    604800
                           86400         ; Retry
                         2419200         ; Expire
                          604800 )       ; Negative Cache TTL
-;
-@           IN      NS      abimanyu.it23.com.
-@           IN      A       10.75.2.4 ; IP Abimanyu
-www         IN      CNAME   abimanyu.it23.com.
-parikesit   IN      A       10.75.2.4 ; IP
-@           IN      AAAA    ::1
+; PTR Records
+2.75.10.in-addr.arpa.		IN      NS      abimanyu.it23.com.
+4                          	IN      PTR     abimanyu.it23.com.
 ```
 
+Restart bind :
+```service bind9 restart```
+
+Kembalikan nameserver agar tersambung dengan Abimanyu
+```host -t PTR 10.75.2.4```
+
+
+### Soal 6
+#### Description :
+Membuat DNS Slave di Werkudara sebagai cadangan jika server DNS utama di Yudhistira mengalami kegagalan
+
+#### Pengerjaan :
+Membuka file di named.conf.local :
+```nano /etc/bind/named.conf.local```
+
+Code :
+```bash
+zone "arjuna.it23.com" {
+	type master;
+    	also-notify { 10.75.2.2; }; # IP Werkudara
+    	allow-transfer { 10.75.2.2; }; # IP Werkudara
+	file "/etc/bind/it23/arjuna.it23.com";
+};
+
+zone "abimanyu.it23.com" {
+	type master;
+    	also-notify { 10.75.2.2; }; # IP Werkudara
+    	allow-transfer { 10.75.2.2; }; # IP Werkudara
+	file "/etc/bind/it23/abimanyu.it23.com";
+};
+
+zone "2.75.10.in-addr.arpa" {
+    type master;
+    file "/etc/bind/it23/4.3.75.10.in-addr.arpa";
+};
+```
+
+Di Werkudara
+
+Membuka file di named.conf.local :
+```nano /etc/bind/named.conf.local```
+
+Code :
+```bash
+zone "arjuna.it23.com" {
+	type slave;
+	masters { 10.75.3.2; }; # IP Yudhis
+	file "/etc/bind/it23/arjuna.it23.com";
+};
+
+zone "abimanyu.it23.com" {
+	type slave;
+	masters { 10.75.3.2; }; # IP Yudhis
+	file "/etc/bind/it23/abimanyu.it23.com";
+};
+
+zone "2.75.10.in-addr.arpa" {
+    type master;
+    file "/etc/bind/it23/4.3.75.10.in-addr.arpa";
+};
+```
+
+Restart bind :
+```service bind9 restart```
