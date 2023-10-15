@@ -1,5 +1,4 @@
-# Jarkom-Modul-2-IT23-2023
-# Laporan Praktikum Modul 2 Jaringan Komputer
+## Laporan Praktikum Modul 2 Jaringan Komputer
 ## Kelompok IT23
 Anggota Kelompok :
 
@@ -80,13 +79,28 @@ www         IN      CNAME   arjuna.it23.com.
 Restart bind :
 ```service bind9 restart```
 
+Setting nameserver pada client:
+```nano /etc/resolv.conf```
+```
+nameserver 192.168.122.1
+```
+
 Di Sadewa Client :
+
+Setting nameserver pada client:
+```nano /etc/resolv.conf```
+```
+nameserver 10.75.3.2 # IP Yudhis
+nameserver 10.75.2.2 # IP Werkudara
+nameserver 192.168.122.1
+```
+
 ping arjuna.it23.com dan www.arjuna.it23.com
 
-```ping arjuna.it23.com```
+```ping arjuna.it23.com -c 5```
 ![ping arjuna it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/eb3d2857-6d10-4629-b1ab-ee66fc881704)
 
-```ping www.arjuna.it23.com```
+```ping www.arjuna.it23.com -c 5```
 ![ping www arjuna it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/41fdb8df-43b1-472f-ab12-f64a2308d5cb)
 
 
@@ -131,7 +145,7 @@ $TTL    604800
                          604800 )       ; Negative Cache TTL
 ;
 @           IN      NS      abimanyu.it23.com.
-@           IN      A       10.75.3.4 ; IP Abimanyu
+@           IN      A       10.75.2.4 ; IP Abimanyu
 www         IN      CNAME   abimanyu.it23.com.
 @           IN      AAAA    ::1' > /etc/bind/abimanyu.it23.com
 
@@ -144,18 +158,49 @@ Restart bind :
 Di Sadewa Client :
 ping arjuna.it23.com dan www.arjuna.it23.com
 
-```ping abimanyu.it23.com```
+```ping abimanyu.it23.com -c 5```
 ![ping abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/a9d25198-c6f3-4d21-b2ad-300f5aa405a9)
 
-```ping www.abimanyu.it23.com```
+```ping www.abimanyu.it23.com -c 5```
 ![ping www abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/1acb66db-81d1-4b2b-a998-6bd55ae71348)
 
 
 ### Soal 4
 #### Description :
-Buatlah website utama dengan akses ke arjuna.it23.com dengan alias www.arjuna.it23.com 
+Buatlah subdomain parikesit.abimanyu.yyy.com yang diatur DNS-nya di Yudhistira dan mengarah ke Abimanyu
 
 #### Pengerjaan :
+Buka file abimanyu.it23.com :
+```nano /etc/bind/abimanyu.it23.com```
+
+Code :
+```bash
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     abimanyu.it23.com. root.abimanyu.it23.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@           IN      NS      abimanyu.it23.com.
+@           IN      A       10.75.2.4 ; IP Abimanyu
+www         IN      CNAME   abimanyu.it23.com.
+parikesit   IN      A       10.75.2.4 ; IP
+@           IN      AAAA    ::1
+```
+
+
+Restart bind :
+```service bind9 restart```
+
+Di Sadewa Client :
+
+```ping parikesit.abimanyu.it23.com -c 5```
+![ping parikesit abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/1654b317-d2bf-448a-866d-91a2de4fb9be)
 
 
 ### Soal 5
