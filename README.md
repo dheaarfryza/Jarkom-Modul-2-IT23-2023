@@ -2,7 +2,9 @@
 # Laporan Praktikum Modul 2 Jaringan Komputer
 ## Kelompok IT23
 Anggota Kelompok :
+
 5027211006 - Rendy Anfi Yudha
+
 5027211013 - Dhea Arfryza Ananda Prasetyo
 
 - [Soal 1](#soal-1)
@@ -17,5 +19,6 @@ Anggota Kelompok :
 
 ### Soal 1
 #### Description :
+Membuat topologi berdasarkan pada folder drive yang diminta, yaitu topologi ke-2. Dengan Yudhistira sebagai DNS Master, Werkudara sebagai DNS Slave, Arjuna sebagai Load Balancer yang terdiri dari beberapa Web Server yaitu Prabakusuma, Abimanyu, dan Wisanggeni.
 
 #### PoC :
