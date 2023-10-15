@@ -495,6 +495,158 @@ Di Sadewa Client :
 Lakukan deployment pada masing-masing worker. Dengan Arjuna merupakan suatu Load Balancer Nginx dengan tiga worker yaitu Prabakusuma, Abimanyu, dan Wisanggeni.
 
 #### Pengerjaan :
+#### Prabukusuma
+Buka file /var/www/jarkom_it23/index.php
+```nano /etc/bind/named.conf.options``` 
+
+Code :
+```bash
+<?php
+echo "Ini Prabukusuma";
+?>
+```
+
+Masukkan config ke /etc/nginx/sites-available/jarkom_it23 :
+```bash
+server {
+    listen 8001;
+    root /var/www/jarkom_it23;
+    index index.php index.html index.htm;
+    server_name _;
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+    }
+    location ~ /\.ht {
+        deny all;
+    }
+    error_log /var/log/nginx/jarkom_it23_error.log;
+    access_log /var/log/nginx/jarkom_it23_access.log;
+}
+```
+
+Run command :
+```
+ln -s /etc/nginx/sites-available/jarkom_it23 /etc/nginx/sites-enabled/jarkom_it23
+
+rm /etc/nginx/sites-enabled/default
+
+service nginx restart
+
+service php7.2-fpm start
+
+service php7.2-fpm status
+```
+
+Akses ke :
+```lynx 10.75.2.5:8001```
+
+Dokum
+
+#### Wisanggeni
+Buka file /var/www/jarkom_it23/index.php
+```nano /etc/bind/named.conf.options``` 
+
+Code :
+```bash
+<?php
+echo "Ini Wisanggeni";
+?>
+```
+
+Masukkan config ke /etc/nginx/sites-available/jarkom_it23 :
+```bash
+server {
+    listen 8002;
+    root /var/www/jarkom_it23;
+    index index.php index.html index.htm;
+    server_name _;
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+    }
+    location ~ /\.ht {
+        deny all;
+    }
+    error_log /var/log/nginx/jarkom_it23_error.log;
+    access_log /var/log/nginx/jarkom_it23_access.log;
+}
+```
+
+Run command :
+```
+ln -s /etc/nginx/sites-available/jarkom_it23 /etc/nginx/sites-enabled/jarkom_it23
+
+rm /etc/nginx/sites-enabled/default
+
+service nginx restart
+
+service php7.2-fpm start
+
+service php7.2-fpm status
+```
+
+Akses ke :
+```lynx 10.75.2.6:8002```
+
+Dokum :
+
+#### Abimanyu
+Buka file /var/www/jarkom_it23/index.php
+```nano /etc/bind/named.conf.options``` 
+
+Code :
+```bash
+<?php
+echo "Ini Abimanyu";
+?>
+```
+
+Masukkan config ke /etc/nginx/sites-available/jarkom_it23 :
+```bash
+server {
+    listen 8003;
+    root /var/www/jarkom_it23;
+    index index.php index.html index.htm;
+    server_name _;
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+    }
+    location ~ /\.ht {
+        deny all;
+    }
+    error_log /var/log/nginx/jarkom_it23_error.log;
+    access_log /var/log/nginx/jarkom_it23_access.log;
+}
+```
+
+Run command :
+```
+ln -s /etc/nginx/sites-available/jarkom_it23 /etc/nginx/sites-enabled/jarkom_it23
+
+rm /etc/nginx/sites-enabled/default
+
+service nginx restart
+
+service php7.2-fpm start
+
+service php7.2-fpm status
+```
+
+Akses ke :
+```lynx 10.75.2.4:8003```
+
+Dokum :
 
 
 ### Soal 10
