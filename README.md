@@ -33,6 +33,7 @@ Buatlah website utama dengan akses ke arjuna.it23.com dengan alias www.arjuna.it
 
 #### Pengerjaan :
 Di Yudhistira DNS Master :
+
 Install :
 ```
 apt-get update
@@ -81,6 +82,7 @@ Restart bind :
 
 Di Sadewa Client :
 ping arjuna.it23.com dan www.arjuna.it23.com
+
 ```ping arjuna.it23.com```
 ![ping arjuna it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/eb3d2857-6d10-4629-b1ab-ee66fc881704)
 
@@ -102,13 +104,18 @@ zone "arjuna.it23.com" {
 	type master;
 	file "/etc/bind/arjuna.it23.com";
 };
+
+zone "abimanyu.it23.com" {
+	type master;
+	file "/etc/bind/jarkom/abimanyu.it23.com";
+};
 ```
 
 Copy file db.local ke folder arjuna.it.23.com :
-```cp /etc/bind/db.local /etc/bind/arjuna.it23.com```
+```cp /etc/bind/db.local /etc/bind/abimanyu.it23.com```
 
-Buka file arjuna.it23.com :
-```nano /etc/bind/arjuna.it23.com```
+Buka file abimanyu.it23.com :
+```nano /etc/bind/abimanyu.it23.com```
 
 Code :
 ```bash
@@ -116,22 +123,33 @@ Code :
 ; BIND data file for local loopback interface
 ;
 $TTL    604800
-@       IN      SOA     arjuna.it23.com. root.arjuna.it23.com. (
+@       IN      SOA     abimanyu.it23.com. root.abimanyu.it23.com. (
                               2         ; Serial
                          604800         ; Refresh
                           86400         ; Retry
                         2419200         ; Expire
                          604800 )       ; Negative Cache TTL
 ;
-@           IN      NS      arjuna.it23.com.
-@           IN      A       10.75.2.3 ; IP Arjuna
-www         IN      CNAME   arjuna.it23.com.
-@           IN      AAAA    ::1
+@           IN      NS      abimanyu.it23.com.
+@           IN      A       10.75.3.4 ; IP Abimanyu
+www         IN      CNAME   abimanyu.it23.com.
+@           IN      AAAA    ::1' > /etc/bind/abimanyu.it23.com
+
 
 ```
 
 Restart bind :
 ```service bind9 restart```
+
+Di Sadewa Client :
+ping arjuna.it23.com dan www.arjuna.it23.com
+
+```ping abimanyu.it23.com```
+![ping abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/a9d25198-c6f3-4d21-b2ad-300f5aa405a9)
+
+```ping www.abimanyu.it23.com```
+![ping www abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/1acb66db-81d1-4b2b-a998-6bd55ae71348)
+
 
 ### Soal 4
 #### Description :
