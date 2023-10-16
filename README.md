@@ -873,7 +873,7 @@ echo "\$TTL    604800
 @               IN      A       10.75.2.4
 www             IN      CNAME   abimanyu.it23.com.
 parikesit       IN      A       10.75.2.4
-www.parikesit   IN      A       10.65.2.4
+www.parikesit   IN      A       10.75.2.4
 ns1             IN      A       10.75.2.2   ; IP Wekudara
 baratayuda      IN      NS      ns1
 ```
