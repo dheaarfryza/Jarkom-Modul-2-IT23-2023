@@ -900,9 +900,14 @@ Akses ke :
 ![13parikestiabimanyu](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/32e3a40f-d0ff-4b0e-85e5-8d9c71ecce84)
 
 
-### Soal 13
+### Soal 14
 #### Description :
-Pada subdomain www.parikesit.abimanyu.yyy.com, DocumentRoot disimpan pada /var/www/parikesit.abimanyu.yyy
+Pada subdomain tersebut folder /public hanya dapat melakukan directory listing sedangkan pada folder /secret tidak dapat diakses (403 Forbidden)
 
 #### Pengerjaan :
+
+Di Client saat mengakses ```lynx http://www.parikesit.abimanyu.it23.com/public```
 ![14parikesit](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/20ef39bc-2b57-49d1-af20-4e02cbc6d896)
+
+Saat mengakses lynx http://www.parikesit.abimanyu.it23.com/secret
+![14parikesitscrt](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/a04548fb-fc1a-48a9-940d-b0de8bc7e7a5)
