@@ -905,9 +905,19 @@ Akses ke :
 Pada subdomain tersebut folder /public hanya dapat melakukan directory listing sedangkan pada folder /secret tidak dapat diakses (403 Forbidden)
 
 #### Pengerjaan :
+Tambahkan config ke /etc/apache2/sites-available/parikesit.abimanyu.it23.com
+```bash
+ <Directory /var/www/parikesit.abimanyu.it23/public>
+        Options +Indexes
+    </Directory>
+
+    <Directory /var/www/parikesit.abimanyu.it23/secret>
+        Options -Indexes
+    </Directory>
+```
 
 Di Client saat mengakses ```lynx http://www.parikesit.abimanyu.it23.com/public```
 ![14parikesit](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/20ef39bc-2b57-49d1-af20-4e02cbc6d896)
 
-Saat mengakses lynx http://www.parikesit.abimanyu.it23.com/secret
+Saat mengakses ```lynx http://www.parikesit.abimanyu.it23.com/secret```
 ![14parikesitscrt](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/a04548fb-fc1a-48a9-940d-b0de8bc7e7a5)
