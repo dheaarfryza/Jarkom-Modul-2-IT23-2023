@@ -36,7 +36,9 @@ Berikut adalah hasil dari Topologi yang sudah dibuat :
 ![topologi(1)](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/967003e3-d590-4188-bd21-0e3238a69c54)
 Dengan Yudhistira sebagai DNS Master nya dan Werkudara sebagai DNS Slave nya, serta Sadewa dan Nakula sebagai Client nya.
 
-Configure Pandudewanata :
+Configure 
+
+Pandudewanata :
 ```bash
 # Static config for eth0
 auto eth0
@@ -62,7 +64,7 @@ iface eth3 inet static
 
 ```
 
-Yudhistira :
+Yudhistira DNS Master:
 ```bash
 auto eth0
 iface eth0 inet static
@@ -71,7 +73,7 @@ iface eth0 inet static
 	gateway 10.75.3.1
 ```
 
-Werkudara :
+Werkudara DNS Slave:
 ```bash
 auto eth0
 iface eth0 inet static
@@ -80,7 +82,7 @@ iface eth0 inet static
 	gateway 10.75.2.1
 ```
 
-Arjuna :
+Arjuna LoadBalancer:
 ```bash
 auto eth0
 iface eth0 inet static
@@ -89,11 +91,47 @@ iface eth0 inet static
 	gateway 10.75.2.1
 ```
 
-Abimanyu :
+Abimanyu WebServer:
 ```bash
 auto eth0
 iface eth0 inet static
 	address 10.75.2.4
+	netmask 255.255.255.0
+	gateway 10.75.2.1
+```
+
+Prabukusuma WebServer:
+```bash
+auto eth0
+iface eth0 inet static
+	address 10.75.2.5
+	netmask 255.255.255.0
+	gateway 10.75.2.1
+```
+
+Wisanggeni WebServer:
+```bash
+auto eth0
+iface eth0 inet static
+	address 10.75.2.6
+	netmask 255.255.255.0
+	gateway 10.75.2.1
+```
+
+Sadewa Client:
+```bash
+auto eth0
+iface eth0 inet static
+	address 10.75.1.2
+	netmask 255.255.255.0
+	gateway 10.75.2.1
+```
+
+Nakula Client:
+```bash
+auto eth0
+iface eth0 inet static
+	address 10.75.1.3
 	netmask 255.255.255.0
 	gateway 10.75.2.1
 ```
@@ -171,9 +209,11 @@ nameserver 192.168.122.1
 ping arjuna.it23.com dan www.arjuna.it23.com
 
 ```ping arjuna.it23.com -c 5```
+
 ![ping arjuna it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/eb3d2857-6d10-4629-b1ab-ee66fc881704)
 
 ```ping www.arjuna.it23.com -c 5```
+
 ![ping www arjuna it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/41fdb8df-43b1-472f-ab12-f64a2308d5cb)
 
 
@@ -232,9 +272,11 @@ Di Sadewa Client :
 ping arjuna.it23.com dan www.arjuna.it23.com
 
 ```ping abimanyu.it23.com -c 5```
+
 ![ping abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/a9d25198-c6f3-4d21-b2ad-300f5aa405a9)
 
 ```ping www.abimanyu.it23.com -c 5```
+
 ![ping www abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/1acb66db-81d1-4b2b-a998-6bd55ae71348)
 
 
@@ -273,6 +315,7 @@ Restart bind :
 Di Sadewa Client :
 
 ```ping parikesit.abimanyu.it23.com -c 5```
+
 ![ping parikesit abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/1654b317-d2bf-448a-866d-91a2de4fb9be)
 
 
@@ -397,9 +440,11 @@ Di Sadewa
 ping arjuna.it23.com dan abimanyu.it23.com
 
 ```ping arjuna.it23.com -c 5```
+
 ![ping www arjuna it23 com saat slave](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/29b16e58-82ee-4d1e-82db-a5369e9c099d)
 
 ```ping abimanyu.it23.com -c 5```
+
 ![ping www abimanyu it23 com saat slave](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/c6785edc-269b-454e-89c6-54907a817099)
 
 
@@ -480,9 +525,11 @@ Restart bind :
 Di Sadewa Client :
 
 ```ping baratayuda.abimanyu.it23.com -c 5```
+
 ![ping baratayuda abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/f0646b3e-6c5c-4845-9a06-0a5d20a938d0)
 
 ```ping www.baratayuda.abimanyu.it23.com -c 5```
+
 ![ping www baratayuda abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/8c524eeb-0faf-416b-b335-d749be503b7d)
 
 
@@ -495,9 +542,11 @@ Buatlah subdomain melalui Werkudara dengan akses rjp.baratayuda.abimanyu.yyy.com
 Di Sadewa Client :
 
 ```ping rjp.baratayuda.abimanyu.it23.com -c 5```
+
 ![ping rjp baratayuda abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/b5183c51-9c13-47c0-bd5a-062c58dc7ace)
 
 ```ping www.rjp.baratayuda.abimanyu.it23.com -c 5```
+
 ![ping www rjp baratayuda abimanyu it23 com](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/59fe1d23-cd65-4ade-a01c-995ddef6e107)
 
 
@@ -554,6 +603,7 @@ service php7.2-fpm status
 
 Akses ke :
 ```lynx 10.75.2.5:8001```
+
 ![9Prabukusuma](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/f009e5c3-2410-457f-b2b2-cb0d76b8b41f)
 
 
@@ -605,6 +655,7 @@ service php7.2-fpm status
 
 Akses ke :
 ```lynx 10.75.2.6:8002```
+
 ![9Wisanggeni](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/18fd7d66-b731-4588-89b1-f1597b582d1f)
 
 
@@ -656,6 +707,7 @@ service php7.2-fpm status
 
 Akses ke :
 ```lynx 10.75.2.4:8003```
+
 ![9Abimanyu](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/33053b3d-e5c6-4679-ae5a-851167ea0f15)
 
 
@@ -696,6 +748,7 @@ Di Nakula Client
 Akses ke :
 ``` lynx http://www.arjuna.it23.com ```
 Run lynx yang sama 3 kali :
+
 ![hi prabukusuma](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/9d9909f4-cf96-4e68-960a-dbf5aea815d9)
 ![hi Abimanyu](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/9db80917-864b-4e31-a083-b24764afe54a)
 ![hi wisanggeni](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/d035dac7-9f6f-4ad2-8a28-881779bb9918)
