@@ -810,6 +810,12 @@ Setelah itu ubahlah agar url www.abimanyu.yyy.com/index.php/home menjadi www.abi
 #### Pengerjaan :
 Masukkan config berikut ke /etc/apache2/sites-available/abimanyu-it23.conf
 ```bash
+<VirtualHost *:80>
+    ServerName abimanyu.it23.com
+    ServerAlias www.abimanyu.it23.com
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/abimanyu-it23
+
 <Directory /var/www/abimanyu-it23>
         Options +Indexes
     </Directory>
@@ -852,6 +858,25 @@ Masukkan config berikut ke /etc/apache2/sites-available/parikesit-abimanyu-it23.
 </VirtualHost>
 ```
 
+Tambahkan www.parikesit ke /etc/bind/jarkom/abimanyu.it03.com
+```bash
+echo "\$TTL    604800
+@          IN      SOA  abimanyu.it23.com. root.abimanyu.it23.com. (
+                            2         ; Serial
+                        604800        ; Refresh
+                        86400         ; Retry
+                        2419200       ; Expire
+                        604800 )      ; Negative Cache TTL
+;
+@               IN      NS      abimanyu.it23.com.
+@               IN      A       10.75.2.4
+www             IN      CNAME   abimanyu.it23.com.
+parikesit       IN      A       10.75.2.4
+www.parikesit   IN      A       10.65.2.4
+ns1             IN      A       10.75.2.2   ; IP Wekudara
+baratayuda      IN      NS      ns1
+```
+
 Menambahkan command yang dibutuhkan untuk website :
 ```bash
 cd /var/www
@@ -870,3 +895,5 @@ rm -rf parikesit-abimanyu-it23/parikesit.abimanyu.yyy.com
 Akses ke :
 
 ```lynx http://www.parikesit.abimanyu.it23.com/home```
+
+![13parikestiabimanyu](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/32e3a40f-d0ff-4b0e-85e5-8d9c71ecce84)
