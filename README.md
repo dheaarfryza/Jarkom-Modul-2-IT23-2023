@@ -921,3 +921,36 @@ Di Client saat mengakses ```lynx http://www.parikesit.abimanyu.it23.com/public``
 
 Saat mengakses ```lynx http://www.parikesit.abimanyu.it23.com/secret```
 ![14parikesitscrt](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/a04548fb-fc1a-48a9-940d-b0de8bc7e7a5)
+
+
+### Soal 15
+#### Description
+Buatlah kustomisasi halaman error pada folder /error untuk mengganti error kode pada Apache. Error kode yang perlu diganti adalah 404 Not Found dan 403 Forbidden.
+
+### Pengerjaan :
+Untuk soal 15 kita hanya perlu mengganti error message pada status 404/403 saat mengakses `www.parikesit.abimanyu.it23.com` . Sebenarnya custom error message sudah tertera pada direktori `/error` pada `403.html` dan `404.html` kita hanya perlu memasukkan path file error tersebut dalam config sebelumnya sebgai berikut :    
+```sh
+    ErrorDocument 404 /error/404.html
+    ErrorDocument 403 /error/403.html
+```     
+Setelah dilakukan konfigurasi seperti diatas, harusnya saat mengakses path yang tidak ditemukan akan menampilkan `ERROR gan, jangan dicoba lagi` dan saat mengakses path yg restricted (path `/secret`) akan menampilkan `Tikus jangan masuk!`. 
+
+- 403
+Coba akses `/secret` ```lynx www.parikesit.abimanyu.it23.com/secret```
+![403](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/94961661/2424001c-0a8d-4f37-8eda-4dae7d59a45e)
+- 404
+Coba akses path bebas `/awokwkwk` ```lynx www.parikesit.abimanyu.it23.com/awokwkwk```   
+![404](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/94961661/52de3115-5941-4151-a616-0c4baa339e81)
+
+
+### Soal 16
+#### Description
+Buatlah suatu konfigurasi virtual host agar file asset www.parikesit.abimanyu.yyy.com/public/js menjadi www.parikesit.abimanyu.yyy.com/js 
+
+### Pengerjaan :
+Untuk no 16 kita hanya perlu membuat alias untuk path `public/js` menjadi `js`, sehingga untuk akses ke asset file di direktori `js` hanya perlu mengakses `www.parikesit.abimanyu.it23.com/js`. Tambahkan config alias pada config sebelumnya sebagai berikut :
+```sh
+ Alias /js /var/www/parikesit-abimanyu-it23/public/js
+``` 
+Setelah ditambahkan config seperti di atas harusnya kita bisa mengakses directory listing hanya dengan mengakses `js` seperti output sebagai berikut.   
+![/js](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/94961661/da2cff7a-85b3-458f-85e9-41a8087706b9)
