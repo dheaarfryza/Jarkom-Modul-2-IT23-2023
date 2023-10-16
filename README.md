@@ -606,6 +606,57 @@ Akses ke :
 
 ![9Prabukusuma](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/f009e5c3-2410-457f-b2b2-cb0d76b8b41f)
 
+#### Abimanyu
+Buka file /var/www/jarkom_it23/index.php
+```nano /etc/bind/named.conf.options``` 
+
+Code :
+```bash
+<?php
+echo "Ini Abimanyu";
+?>
+```
+
+Masukkan config ke /etc/nginx/sites-available/jarkom_it23 :
+```bash
+server {
+    listen 8003;
+    root /var/www/jarkom_it23;
+    index index.php index.html index.htm;
+    server_name _;
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+    }
+    location ~ /\.ht {
+        deny all;
+    }
+    error_log /var/log/nginx/jarkom_it23_error.log;
+    access_log /var/log/nginx/jarkom_it23_access.log;
+}
+```
+
+Run command :
+```
+ln -s /etc/nginx/sites-available/jarkom_it23 /etc/nginx/sites-enabled/jarkom_it23
+
+rm /etc/nginx/sites-enabled/default
+
+service nginx restart
+
+service php7.2-fpm start
+
+service php7.2-fpm status
+```
+
+Akses ke :
+```lynx 10.75.2.4:8002```
+
+![9Abimanyu](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/33053b3d-e5c6-4679-ae5a-851167ea0f15)
+
 
 #### Wisanggeni
 Buka file /var/www/jarkom_it23/index.php
@@ -654,61 +705,11 @@ service php7.2-fpm status
 ```
 
 Akses ke :
-```lynx 10.75.2.6:8002```
+```lynx 10.75.2.6:8003```
 
 ![9Wisanggeni](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/18fd7d66-b731-4588-89b1-f1597b582d1f)
 
 
-#### Abimanyu
-Buka file /var/www/jarkom_it23/index.php
-```nano /etc/bind/named.conf.options``` 
-
-Code :
-```bash
-<?php
-echo "Ini Abimanyu";
-?>
-```
-
-Masukkan config ke /etc/nginx/sites-available/jarkom_it23 :
-```bash
-server {
-    listen 8003;
-    root /var/www/jarkom_it23;
-    index index.php index.html index.htm;
-    server_name _;
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-    location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
-    }
-    location ~ /\.ht {
-        deny all;
-    }
-    error_log /var/log/nginx/jarkom_it23_error.log;
-    access_log /var/log/nginx/jarkom_it23_access.log;
-}
-```
-
-Run command :
-```
-ln -s /etc/nginx/sites-available/jarkom_it23 /etc/nginx/sites-enabled/jarkom_it23
-
-rm /etc/nginx/sites-enabled/default
-
-service nginx restart
-
-service php7.2-fpm start
-
-service php7.2-fpm status
-```
-
-Akses ke :
-```lynx 10.75.2.4:8003```
-
-![9Abimanyu](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/33053b3d-e5c6-4679-ae5a-851167ea0f15)
 
 
 
