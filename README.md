@@ -898,3 +898,11 @@ Akses ke :
 ```lynx http://www.parikesit.abimanyu.it23.com/home```
 
 ![13parikestiabimanyu](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/32e3a40f-d0ff-4b0e-85e5-8d9c71ecce84)
+
+
+### Soal 13
+#### Description :
+Pada subdomain www.parikesit.abimanyu.yyy.com, DocumentRoot disimpan pada /var/www/parikesit.abimanyu.yyy
+
+#### Pengerjaan :
+![14parikesit](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/20ef39bc-2b57-49d1-af20-4e02cbc6d896)
