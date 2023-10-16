@@ -828,7 +828,7 @@ Menambahkan command yang dibutuhkan untuk menjalankan config
 cd /etc/apache2/sites-available/
 
 a2enmod rewrite
-a2ensite abimanyu-it11.conf
+a2ensite abimanyu-it23.conf
 service apache2 reload
 service apache2 start
 service apache2 status
@@ -848,10 +848,11 @@ Pada subdomain www.parikesit.abimanyu.yyy.com, DocumentRoot disimpan pada /var/w
 Masukkan config berikut ke /etc/apache2/sites-available/parikesit-abimanyu-it23.conf
 ```bash
 <VirtualHost *:80>
-    ServerName parikesit.abimanyu.it11.com
-    ServerAlias www.parikesit.abimanyu.it11.com
+    ServerName parikesit.abimanyu.it23.com
+    ServerAlias 10.75.2.4
+    ServerAlias www.parikesit.abimanyu.it23.com
     ServerAdmin webmaster@localhost
-    DocumentRoot /var/www/parikesit-abimanyu-it11
+    DocumentRoot /var/www/parikesit-abimanyu-it23
 
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
