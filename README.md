@@ -715,6 +715,7 @@ Akses ke :
 ### Soal 10
 #### Description :
 Gunakan algoritma Round Robin untuk Load Balancer pada Arjuna. Gunakan server_name pada soal nomor 1. Untuk melakukan pengecekan akses alamat web tersebut kemudian pastikan worker yang digunakan untuk menangani permintaan akan berganti ganti secara acak. Untuk webserver di masing-masing worker wajib berjalan di port 8001-8003. Contoh
+    
     - Prabakusuma:8001
     - Abimanyu:8002
     - Wisanggeni:8003
@@ -747,6 +748,7 @@ service nginx restart
 Di Nakula Client
 Akses ke :
 ``` lynx http://www.arjuna.it23.com ```
+
 Run lynx yang sama 3 kali :
 
 ![hi prabukusuma](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/9d9909f4-cf96-4e68-960a-dbf5aea815d9)
@@ -759,21 +761,111 @@ Run lynx yang sama 3 kali :
 #### Description :
 Lakukan konfigurasi Apache Web Server pada worker Abimanyu dengan web server www.abimanyu.yyy.com. Pertama dibutuhkan web server dengan DocumentRoot pada /var/www/abimanyu.yyy
 
-
 ### Pengerjaan :
+Masukkan config ke /etc/apache2/sites-available/abimanyu-it23.conf :
+```bash
+<VirtualHost *:80>
+    ServerName abimanyu.it23.com
+    ServerAlias www.abimanyu.it23.com
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/abimanyu-it23
+
+    <Directory /var/www/abimanyu-it23>
+        Options +Indexes
+    </Directory>
+
+    RewriteEngine On
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+Menambahkan command yang dibutuhkan untuk website di var/www/
+```bash
+cd /var/www
+
+wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1a4V23hwK9S7hQEDEcv9FL14UkkrHc-Zc' -O abimanyu
+
+unzip abimanyu -d abimanyu-it23
+
+rm abimanyu
+
+mv abimanyu-it23/abimanyu.yyy.com/* abimanyu-it23
+
+rmdir abimanyu-it23/abimanyu.yyy.com
+```
+
+Akses ke :
+
+```lynx http://www.abimanyu.it23.com```
 ![11Abimanyu](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/8fb2a4c6-73a1-4658-a600-1d617efaadf2)
 
 
 ### Soal 12
 #### Description :
+Setelah itu ubahlah agar url www.abimanyu.yyy.com/index.php/home menjadi www.abimanyu.yyy.com/home.
 
+#### Pengerjaan :
+Masukkan config berikut ke /etc/apache2/sites-available/abimanyu-it23.conf
+```bash
+<Directory /var/www/abimanyu-it23>
+        Options +Indexes
+    </Directory>
 
-### Pengerjaan :
+    Alias /home /var/www/abimanyu-it23/index.php/home
+```
+
+Menambahkan command yang dibutuhkan untuk menjalankan config
+```bash
+cd /etc/apache2/sites-available/
+
+a2enmod rewrite
+a2ensite abimanyu-it11.conf
+service apache2 reload
+service apache2 start
+service apache2 status
+```
+
+Akses ke :
+
+```lynx http://www.abimanyu.it23.com/home```
 ![12Abimanyu](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/89828723/20417717-2c10-4786-a07b-3d6b0189cd69)
 
 
 ### Soal 13
 #### Description :
+Pada subdomain www.parikesit.abimanyu.yyy.com, DocumentRoot disimpan pada /var/www/parikesit.abimanyu.yyy
 
+#### Pengerjaan :
+Masukkan config berikut ke /etc/apache2/sites-available/parikesit-abimanyu-it23.conf
+```bash
+<VirtualHost *:80>
+    ServerName parikesit.abimanyu.it11.com
+    ServerAlias www.parikesit.abimanyu.it11.com
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/parikesit-abimanyu-it11
 
-### Pengerjaan :
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+Menambahkan command yang dibutuhkan untuk website :
+```bash
+cd /var/www
+
+wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1LdbYntiYVF_NVNgJis1GLCLPEGyIOreS' -O parikesit.zip
+
+unzip parikesit.zip -d parikesit-abimanyu-it23
+
+rm parikesit.zip
+
+mv parikesit-abimanyu-it23/parikesit.abimanyu.yyy.com/* parikesit-abimanyu-it23
+
+rm -rf parikesit-abimanyu-it23/parikesit.abimanyu.yyy.com
+```
+
+Akses ke :
+
+```lynx http://www.parikesit.abimanyu.it23.com/home```
