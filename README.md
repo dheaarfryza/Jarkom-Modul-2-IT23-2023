@@ -954,3 +954,31 @@ Untuk no 16 kita hanya perlu membuat alias untuk path `public/js` menjadi `js`, 
 ``` 
 Setelah ditambahkan config seperti di atas harusnya kita bisa mengakses directory listing hanya dengan mengakses `js` seperti output sebagai berikut.   
 ![/js](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/94961661/da2cff7a-85b3-458f-85e9-41a8087706b9)
+
+
+### Soal 17
+#### Description 
+Buatlah konfigurasi agar www.rjp.baratayuda.abimanyu.yyy.com hanya dapat diakses melalui port 14000 dan 14400.
+
+### Pengerjaan :
+
+
+### Soal 18
+#### Description 
+Buatlah autentikasi username berupa “Wayang” dan password “baratayudayyy” dengan yyy merupakan kode kelompok. Letakkan DocumentRoot pada /var/www/rjp.baratayuda.abimanyu.yyy.
+
+### Pengerjaan :
+
+
+### Soal 19
+#### Description 
+Buatlah agar setiap kali mengakses IP dari Abimanyu akan secara otomatis dialihkan ke www.abimanyu.yyy.com (alias)
+
+### Pengerjaan :
+
+
+### Soal 20
+#### Description 
+Karena website www.parikesit.abimanyu.yyy.com semakin banyak pengunjung dan banyak gambar gambar random, maka ubahlah request gambar yang memiliki substring “abimanyu” akan diarahkan menuju abimanyu.png.
+
+### Pengerjaan :
