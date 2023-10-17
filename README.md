@@ -849,7 +849,6 @@ Masukkan config berikut ke /etc/apache2/sites-available/parikesit-abimanyu-it23.
 ```bash
 <VirtualHost *:80>
     ServerName parikesit.abimanyu.it23.com
-    ServerAlias 10.75.2.4
     ServerAlias www.parikesit.abimanyu.it23.com
     ServerAdmin webmaster@localhost
     DocumentRoot /var/www/parikesit-abimanyu-it23
@@ -955,30 +954,160 @@ Untuk no 16 kita hanya perlu membuat alias untuk path `public/js` menjadi `js`, 
 Setelah ditambahkan config seperti di atas harusnya kita bisa mengakses directory listing hanya dengan mengakses `js` seperti output sebagai berikut.   
 ![/js](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/94961661/da2cff7a-85b3-458f-85e9-41a8087706b9)
 
-
 ### Soal 17
-#### Description 
-Buatlah konfigurasi agar www.rjp.baratayuda.abimanyu.yyy.com hanya dapat diakses melalui port 14000 dan 14400.
+#### Description
+Agar aman, buatlah konfigurasi agar www.rjp.baratayuda.abimanyu.yyy.com hanya dapat diakses melalui port 14000 dan 14400.
 
 ### Pengerjaan :
+Untuk membuat domain `www.rjp.baratayuda.abimanyu.it23.com` agar hanya bisa diakses melalui port 14000 / 14400 kita buat config baru untuk domain `www.rjp.baratayuda.abimanyu.it23.com`
+
+- Resources :
+Langkah pertama seperti domaain" sebelumnya lakukan download resource yang telah disediakan dan buat migrasikan ke file domain `www.rjp.baratayuda.abimanyu.it23.com`
+```sh
+cd /var/www
+
+wget --no-check-certificate 'https://drive.google.com/u/0/uc?id=1pPSP7yIR05JhSFG67RVzgkb-VcW9vQO6&export=download' -O baratayuda
+
+unzip baratayuda -d rjp-baratayuda-abimanyu
+
+rm baratayuda
+
+mv rjp-baratayuda-abimanyu/rjp.baratayuda.abimanyu.yyy.com/* rjp-baratayuda-abimanyu
+
+rmdir rjp-baratayuda-abimanyu/rjp.baratayuda.abimanyu.yyy.com
+```
+- Konfigurasi :
+Buat konfigurasi baru untuk `www.rjp.baratayuda.abimanyu.it23.com`,
+kurang lebih sama seperti step konfigurasi sebelum"nya
+```sh
+echo '<VirtualHost *:14000 *:14400>
+    ServerName rjp.baratayuda.abimanyu.it23.com
+    ServerAlias www.rjp.baratayuda.abimanyu.it23.com
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/rjp-baratayuda-abimanyu
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    <Directory "/var/www/rjp-baratayuda-abimanyu">
+        Options +FollowSymLinks -Multiviews
+        AllowOverride All
+    </Directory>
+</VirtualHost>' >/etc/apache2/sites-available/rjp-baratayuda-abimanyu-it23.conf
+``` 
+Tidak lupa tambahkan konfigurasi port
+```sh
+echo '# If you just change the port or add more ports here, you will likely also
+# have to change the VirtualHost statement in
+# /etc/apache2/sites-enabled/000-default.conf
+
+Listen 80
+Listen 14000
+Listen 14400
+
+<IfModule ssl_module>
+        Listen 443
+</IfModule>
+
+<IfModule mod_gnutls.c>
+        Listen 443
+</IfModule>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet' >/etc/apache2/ports.conf
+```
+Terakhir lakukan restart
+```sh
+a2ensite rjp-baratayuda-abimanyu-it23.conf
+service apache2 reload
+service apache2 start
+service apache2 status
+```
+Lalu jalankan semua config tersebut dalam satu script, jika konfigurasi sudah benar maka harusnya domain `www.rjp.baratayuda.abimanyu.it23.com` hanya bisa diakses dengan menggunakan port 14000 / 14400 .
+
+- Default access :
+`lynx www.rjp.baratayuda.abimanyu.it23.com`
+![default-rjp](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/94961661/d8882aea-3e72-43e5-9e09-bcbf24795c1e)
+- Access with :14000 / :14400
+`lynx www.rjp.baratayuda.abimanyu.it23.com:14000` || `lynx www.rjp.baratayuda.abimanyu.it23.com:14400`
+![14000|14400](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/94961661/9acbf534-ce40-4de5-849f-596c97a27489)
 
 
 ### Soal 18
-#### Description 
-Buatlah autentikasi username berupa “Wayang” dan password “baratayudayyy” dengan yyy merupakan kode kelompok. Letakkan DocumentRoot pada /var/www/rjp.baratayuda.abimanyu.yyy.
+#### Description
+Untuk mengaksesnya buatlah autentikasi username berupa “Wayang” dan password “baratayudayyy” dengan yyy merupakan kode kelompok. Letakkan DocumentRoot pada /var/www/rjp.baratayuda.abimanyu.yyy.
 
 ### Pengerjaan :
+Untuk menambah kredensial, kita harus menambahkan proses autentikasi untuk domain `www.rjp.baratayuda.abimanyu.it23.com`
+
+Tambahkan proses autentikasi pada config di atas dengan menambahkan beberapa line sebagai berikut :
+```sh
+    <Directory "/var/www/rjp-baratayuda-abimanyu">
+        Options +FollowSymLinks -Multiviews
+        AllowOverride All
+        AuthType Basic
+        AuthName "Restricted Content"
+        AuthUserFile /etc/apache2/.htpasswd
+        Require valid-user
+    </Directory>
+```
+Kemudian untuk kredensial akan disimpan di .htaccess
+```sh
+cd /etc/apache2/sites-available/
+
+htpasswd -c /etc/apache2/.htpasswd Wayang
+chmod 755 /etc/apache2/.htpasswd
+```
+Setelah menambahkan proses autentikasi seperti di atas harusnya saat mengakses `lynx www.rjp.baratayuda.abimanyu.it23.com:14000` || `lynx www.rjp.baratayuda.abimanyu.it23.com:14400` 
+Terdapat form untuk mengisi user dan password yang telah diset.
+
+- Authentication :
+`Username`
+![user](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/94961661/8c829924-0f88-4553-a4da-28a2221a6ea4)
+
+`Password`
+![password](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/94961661/67a12c0f-c467-484f-a6e2-1ca0dcd5dc09)
+
+`Successfully Logged in`
+![success](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/94961661/da506993-1d3a-439f-b407-7ec9408f961c)
+
+`False Creds`
+![retr](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/94961661/73a25632-b9bc-4f37-8f39-2189f68d580f)
 
 
 ### Soal 19
-#### Description 
+#### Description
 Buatlah agar setiap kali mengakses IP dari Abimanyu akan secara otomatis dialihkan ke www.abimanyu.yyy.com (alias)
 
 ### Pengerjaan :
+Untuk poin 19, kita hanya perlu menambahkan alias pada config domain `abimanyu.it23.com` . Supaya semua akses ke ip abimanyu akan mengarah ke domain `abimanyu.it23.com`
+
+Tambahkan alias :
+`ServerAlias 10.75.2.4` 
+Pada config `/etc/apache2/sites-available/abimanyu-it23.conf`
+
+Jalankan lagi script confignya dan seharusnya ketika coba akses ke ip abimanyu akan diarahkan ke domain `abimanyu.it23.com`
+![ipabimanyu](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/94961661/77b5a2ec-aca3-4e41-808c-d751a692a778)
 
 
 ### Soal 20
-#### Description 
+#### Description
 Karena website www.parikesit.abimanyu.yyy.com semakin banyak pengunjung dan banyak gambar gambar random, maka ubahlah request gambar yang memiliki substring “abimanyu” akan diarahkan menuju abimanyu.png.
 
 ### Pengerjaan :
+Untuk poin 20, kita harus mengatur request user apabila path nya mengandung abimanyu akan diarahkan untuk mendownload abimanyu.png
+misal `lynx parikesit.abimanyu.it23.com/public/images/abimanyuawokwkwk` akan diarahkan untuk mendownload `abimanyu.png`
+
+```sh
+    RewriteCond %{REQUEST_URI} abimanyu [NC]
+    RewriteRule (.*) /public/images/abimanyu.png [L]
+``` 
+Tambahkan script tersebut ke config `/etc/apache2/sites-available/parikesit-abimanyu-it23.conf`
+
+Setelah menambah rewriterule seperti di atas seharusnya setiap request image yang mengandung string abimanyu akan diarahkan untuk mendownload abimanyu.png
+
+`Proceed?`
+![yes|no](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/94961661/3f56963d-3509-4aa0-b12a-41206a384d22)
+`Filename`
+![awokwkw](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/94961661/0005a930-1897-45e3-93bf-e91c3ca673f0)
+`Saved File`    
+![tamat](https://github.com/dheaarfryza/Jarkom-Modul-2-IT23-2023/assets/94961661/4a5c88eb-186c-41e8-9b21-83fc4428d7fb)
